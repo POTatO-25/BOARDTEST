@@ -10,8 +10,8 @@
 <body>
 <h1>Write</h1>
 <form action="/board/write" method="post">
-    <input type="text" id="title" name="title"><br>
-    <input type="text" id="content" name="content"><br>
+    title <input type="text" id="title" name="title"><br>
+    content <input type="text" id="content" name="content"><br>
     <button id="writeBtn" type="submit">write</button>
 </form>
 </body>
@@ -21,7 +21,7 @@
         const titleInput = $('input[name="title"]').val();
         const contentInput = $('input[name="content"]').val();
 
-        if (titleInput.trim() === '' || contentInput.trim() === '') {
+        if (titleInput === null || contentInput === null) {
             $('input[name="title"]').focus();
             $('input[name="content"]').focus();
             alert("Hellllll");
