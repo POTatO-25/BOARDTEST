@@ -12,12 +12,21 @@
 <form action="/board/login" method="post">
 <input type="text" name="id" placeholder="id"><br>
 <input type="password" name="pwd" placeholder="password"><br>
-<button type="submit">Login</button>
+<button id="loginBtn" type="submit">Login</button>
     <a href="/board/joinHome">Join</a>
 </form>
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    ${loginError}
+    $("#loginBtn").on('click', function () {
+        const idInput = $('input[name="id"]').val();
+        const pwdInput = $('input[name="pwd"]').val();
+
+        if (idInput.trim() === '' || pwdInput.trim() === '') {
+            $('input[name="id"]').focus();
+            $('input[name="pwd"]').focus();
+            alert("아이디 또는 비밀번호를 입력하세요.");
+        }
+    });
 </script>
 </html>
