@@ -9,4 +9,7 @@ import java.util.List;
 public interface PostDao {
     public List<PostDto> getPost();
     public void insertPost(String writer, String title, String date, String content);
+    public PostDto getPostInfo(int postNumber);
+    public void editPost(int postNumber, String title, String content);
+    public PostDto getPostTitleContent(int postNumber);
 }
