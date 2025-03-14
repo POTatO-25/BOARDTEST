@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BoardController {
@@ -106,13 +108,17 @@ public class BoardController {
         return "redirect:/boardHome";
     }
 
-    @GetMapping("/postDelete")
-    public String postDelete(@RequestParam("n") int postNumber) {
+    @PostMapping("/postDelete")
+    @ResponseBody
+    public Map<String, String> postDelete(@RequestParam("postNumber") int postNumber) {
         System.out.println("postDeleteController");
 
         postDao.deletePost(postNumber);
         System.out.println("DB 삭제 완료");
 
-        return "redirect:/boardHome";
+        Map<String, String> response = new HashMap<>();
+        response.put("status", "success");
+
+        return response;
     }
 }
