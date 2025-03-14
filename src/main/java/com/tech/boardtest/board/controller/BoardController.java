@@ -9,11 +9,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class BoardController {
@@ -65,6 +68,41 @@ public class BoardController {
         System.out.println("writeDate: " + writeDate);
 
         postDao.insertPost(sessionId, title, writeDate, content);
+
+        return "redirect:/boardHome";
+    }
+
+    @GetMapping("/postDetail")
+    public String postDetail(@RequestParam("n") int postNumber, Model model, HttpSession session) {
+        System.out.println("postDetailController");
+        String sessionId = (String) session.getAttribute("session_user_id");
+
+        PostDto postDto = postDao.getPostInfo(postNumber);
+
+        model.addAttribute("sessionId", sessionId);
+        model.addAttribute("postInfo", postDto);
+
+        return "board/postDetail";
+    }
+
+    @GetMapping("/postEdit")
+    public String postEdit(@RequestParam("n") int postNumber, Model model) {
+        System.out.println("postEditController");
+
+        PostDto postDto = postDao.getPostTitleContent(postNumber);
+
+        model.addAttribute("post", postDto);
+        model.addAttribute("postNumber", postNumber);
+
+        return "board/postEdit";
+    }
+
+    @PostMapping("/edit")
+    public String edit(@RequestParam("n") int postNumber, @RequestParam("title") String title, @RequestParam("content") String content) {
+        System.out.println("editController");
+
+        postDao.editPost(postNumber, title, content);
+        System.out.println("DB 업데이트 성공");
 
         return "redirect:/boardHome";
     }

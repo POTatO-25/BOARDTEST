@@ -9,4 +9,13 @@
     <insert id="insertPost">
         INSERT INTO post (post_writer, post_title, post_date, post_content) VALUES (#{writer}, #{title}, #{date}, #{content})
     </insert>
+    <select id="getPostInfo" resultType="com.tech.boardtest.board.dto.PostDto">
+        SELECT * FROM post WHERE post_number = #{postNumber}
+    </select>
+    <update id="editPost">
+        UPDATE post SET post_title = #{title}, post_content = #{content} WHERE post_number = #{postNumber}
+    </update>
+    <select id="getPostTitleContent" resultType="com.tech.boardtest.board.dto.PostDto">
+        SELECT post_title, post_content FROM post WHERE post_number = #{postNumber}
+    </select>
 </mapper>

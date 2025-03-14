@@ -28,15 +28,14 @@
         <th scope="col">Date</th>
         <th scope="col">Cnt</th>
     </tr>
-    <%-- 아래를 for문으로 돌려서 DB에 저장된 데이터 넣어주기 --%>
     <c:forEach var="post" items="${postList}">
-        <tr>
-            <td>${post.post_number}</td>
-            <td>${post.post_title}</td>
-            <td>${post.post_writer}</td>
-            <td>${post.post_date}</td>
-            <td>${post.post_cnt}</td>
-        </tr>
+    <tr onclick="location.href='postDetail?n=${post.post_number}'" style="cursor: pointer;">
+        <td>${post.post_number}</td>
+        <td> ${post.post_title}</td>
+        <td>${post.post_writer}</td>
+        <td>${post.post_date}</td>
+        <td>${post.post_cnt}</td>
+    </tr>
     </c:forEach>
 </table>
 <c:if test="${sessionId != null}">

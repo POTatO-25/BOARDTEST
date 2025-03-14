@@ -52,6 +52,7 @@ public class LoginRestController {
             return response;
         }
 
+        System.out.println("id :" + id + " pwd: " + pwd);
         return response;
     }
 }
