@@ -24,16 +24,31 @@ public class BoardController {
     private PostDao postDao;
 
     @GetMapping("/boardHome")
-    public String boardHome(HttpSession session, Model model) {
+    public String boardHome(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "pageSize", defaultValue = "10") int pageSize,
+                            HttpSession session, Model model) {
         System.out.println("boardHomeController");
 
         String sessionId = (String) session.getAttribute("session_user_id");
         model.addAttribute("sessionId", sessionId);
 
-        // post 테이블에 존재하는 데이터 가져와서 List<PostDto> 형태로 받아서 model에 저장
-        List<PostDto> postList = postDao.getPost();
+        int totalCount = postDao.selectPostCount(); // 전체 게시글 개수
+        int totalPage = (int) Math.ceil((double)totalCount / pageSize); // 총 페이지 수
+
+        //  현재 페이지 범위 보정
+        if(page < 1) page = 1;
+        else if(page > totalPage) page = totalPage;
+
+        // 오프셋(시작 위치) 계산
+        int offset = (page - 1) * pageSize;
+
+        // 해당 페이지 목록 조회
+        List<PostDto> postList = postDao.getPost(offset, pageSize);
 
         model.addAttribute("postList", postList);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("pageSize", pageSize);
+        model.addAttribute("totalCount", totalCount);
+        model.addAttribute("totalPage", totalPage);
 
         return "board/boardHome";
     }

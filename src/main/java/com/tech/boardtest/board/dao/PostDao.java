@@ -7,7 +7,8 @@ import java.util.List;
 
 @Mapper
 public interface PostDao {
-    public List<PostDto> getPost();
+    public List<PostDto> getPost(int offset, int limit);
+    public int selectPostCount();
     public void insertPost(String writer, String title, String date, String content);
     public PostDto getPostInfo(int postNumber);
     public void editPost(int postNumber, String title, String content);

@@ -41,5 +41,24 @@
 <c:if test="${sessionId != null}">
     <button type="button" onclick="location.href='/board/postWrite'">write</button>
 </c:if>
+<c:set var="cp" value="${currentPage}" />
+<c:set var="tp" value="${totalPage}" />
+
+<c:if test="${cp > 1}">
+    <a href="/board/boardHome?page=${cp - 1}">이전</a>
+</c:if>
+<c:forEach var="i" begin="1" end="${tp}">
+    <c:choose>
+        <c:when test="${i == cp}">
+            <b>${i}</b> &nbsp;
+        </c:when>
+        <c:otherwise>
+            <a href="/board/boardHome?page=${i}"></a>&nbsp;
+        </c:otherwise>
+    </c:choose>
+</c:forEach>
+<c:if test="${cp < tp}">
+    <a href="/board/boardHome?page=${cp + 1}">다음</a>
+</c:if>
 </body>
 </html>
