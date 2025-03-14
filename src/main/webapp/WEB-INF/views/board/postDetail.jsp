@@ -24,7 +24,7 @@
         <td>Content ${postInfo.post_content}</td>
     </tr>
 </table>
-<button type="button" onclick="location.href='/board/postEdit?n=${postInfo.post_number}'">Edit</button><button type="button">Delete</button><br>
+<button type="button" onclick="location.href='/board/boardHome'">Home</button><button type="button" onclick="location.href='/board/postEdit?n=${postInfo.post_number}'">Edit</button><button type="button">Delete</button><br>
 ${sessionId}<br>
 <input type="text" id="commentInput" placeholder="댓글을 입력하세요."><button type="button">Write</button>
 <hr>

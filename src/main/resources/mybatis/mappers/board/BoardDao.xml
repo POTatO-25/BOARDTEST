@@ -12,6 +12,9 @@
     <select id="getPostInfo" resultType="com.tech.boardtest.board.dto.PostDto">
         SELECT * FROM post WHERE post_number = #{postNumber}
     </select>
+    <update id="updatePostCnt">
+        UPDATE post SET post_cnt = post_cnt + 1 WHERE post_number = #{postNumber}
+    </update>
     <update id="editPost">
         UPDATE post SET post_title = #{title}, post_content = #{content} WHERE post_number = #{postNumber}
     </update>

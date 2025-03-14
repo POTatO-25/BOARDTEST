@@ -9,14 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class BoardController {
@@ -77,6 +74,7 @@ public class BoardController {
         System.out.println("postDetailController");
         String sessionId = (String) session.getAttribute("session_user_id");
 
+        postDao.updatePostCnt(postNumber);
         PostDto postDto = postDao.getPostInfo(postNumber);
 
         model.addAttribute("sessionId", sessionId);
