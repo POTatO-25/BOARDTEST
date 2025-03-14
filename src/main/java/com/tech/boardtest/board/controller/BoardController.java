@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -101,6 +102,16 @@ public class BoardController {
 
         postDao.editPost(postNumber, title, content);
         System.out.println("DB 업데이트 성공");
+
+        return "redirect:/boardHome";
+    }
+
+    @GetMapping("/postDelete")
+    public String postDelete(@RequestParam("n") int postNumber) {
+        System.out.println("postDeleteController");
+
+        postDao.deletePost(postNumber);
+        System.out.println("DB 삭제 완료");
 
         return "redirect:/boardHome";
     }

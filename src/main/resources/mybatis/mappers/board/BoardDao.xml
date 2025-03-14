@@ -21,4 +21,7 @@
     <select id="getPostTitleContent" resultType="com.tech.boardtest.board.dto.PostDto">
         SELECT post_title, post_content FROM post WHERE post_number = #{postNumber}
     </select>
+    <delete id="deletePost">
+        DELETE FROM post WHERE post_number = #{postNumber}
+    </delete>
 </mapper>

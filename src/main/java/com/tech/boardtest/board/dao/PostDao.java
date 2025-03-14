@@ -13,4 +13,5 @@ public interface PostDao {
     public void editPost(int postNumber, String title, String content);
     public PostDto getPostTitleContent(int postNumber);
     public void updatePostCnt(int postNumber);
+    public void deletePost(int postNumber);
 }
